@@ -54,8 +54,16 @@ CODE_DIRECTORY=/vagrant
 
 # Get modules source code
 cd $CODE_DIRECTORY
-sudo -s -u vagrant -H git clone https://github.com/pichenettes/eurorack.git eurorack-modules
-cd $CODE_DIRECTORY/eurorack-modules
+USER_GITHUB_URL=$1
+if [ $USER_GITHUB_URL ]
+then
+	sudo -s -u vagrant -H git clone $USER_GITHUB_URL eurorack-modules
+	cd $CODE_DIRECTORY/eurorack-modules
+	sudo -s -u vagrant -H git remote add pichenettes https://github.com/pichenettes/eurorack.git
+else
+	sudo -s -u vagrant -H git clone https://github.com/pichenettes/eurorack.git eurorack-modules
+	cd $CODE_DIRECTORY/eurorack-modules
+fi
 sudo -s -u vagrant -H git submodule init
 sudo -s -u vagrant -H git submodule update
 
