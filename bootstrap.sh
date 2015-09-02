@@ -105,4 +105,11 @@ sudo -s -u vagrant -H git submodule update
 echo 'export LC_ALL=en_US.UTF-8' >> /home/vagrant/.bashrc
 echo 'export LANGUAGE=en_US' >> /home/vagrant/.bashrc
 echo 'export PYTHONPATH=.:$PYTHONPATH' >> /home/vagrant/.bashrc
+
+USER_BASHRC=/vagrant/user_bashrc
+if [ -f $USER_BASHRC ]
+then
+	cat $USER_BASHRC >> /home/vagrant/.bashrc
+fi
+
 echo "cd $CODE_DIRECTORY/eurorack-modules" >> /home/vagrant/.bashrc
